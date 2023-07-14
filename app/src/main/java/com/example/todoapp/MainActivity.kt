@@ -34,7 +34,24 @@ class MainActivity : AppCompatActivity() {
         listViewTasks.adapter = adapter
         listViewTasks.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
+        // Set click listener for the add button
+        buttonAddTask.setOnClickListener {
+            addTask()
+        }
 
+        // Set item click listener for the ListView to toggle the checked state
+        listViewTasks.setOnItemClickListener { _, view, position, _ ->
+            val isChecked = (view as CheckedTextView).isChecked
+            listViewTasks.setItemChecked(position, !isChecked)
+        }
+
+        // Set long click listener for the ListView to remove the task on long press
+        listViewTasks.setOnItemLongClickListener { _, _, position, _ ->
+            tasks.removeAt(position)
+            adapter.notifyDataSetChanged()
+            true
+        }
+    }
 
     private fun addTask() {
         // Get the task text from the EditText and trim any leading/trailing whitespace
