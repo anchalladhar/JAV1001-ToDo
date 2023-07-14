@@ -26,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         buttonAddTask = findViewById(R.id.buttonAddTask)
         listViewTasks = findViewById(R.id.listViewTasks)
 
+        // Initialize task list and adapter
+        tasks = mutableListOf()
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_checked, tasks)
+
+        // Set the adapter for the ListView and enable multiple choice mode
+        listViewTasks.adapter = adapter
+        listViewTasks.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+
 
 
     private fun addTask() {
